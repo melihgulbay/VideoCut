@@ -1,104 +1,61 @@
 # VideoCut - Flutter Desktop Video Editor
 
-![Flutter](https://img.shields.io/badge/Flutter-3.35.7-02569B?logo=flutter)
-![Dart](https://img.shields.io/badge/Dart-3.9.2-0175C2?logo=dart)
-![Riverpod](https://img.shields.io/badge/State-Riverpod_2.6.1-00D4FF)
-![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
+A professional desktop video editor built with Flutter, showcasing advanced state management, custom design systems, and complex UI implementation.
 
-A professional desktop video editor showcasing advanced **Flutter development skills** - custom design system, Riverpod state management, and pixel-perfect UI implementation.
+## Flutter Implementation Overview
 
----
+This project demonstrates production-level Flutter development with Riverpod state management, a complete custom design system, and sophisticated UI patterns suitable for enterprise applications.
 
-## ?? Flutter Skills Demonstrated
+## Technical Stack
 
-? **Advanced State Management** - Riverpod StateNotifier with immutable state  
-? **Custom Design System** - Reusable components, consistent theming  
-? **Complex UI** - Multi-track timeline, drag-drop, real-time preview  
-? **FFI Integration** - Native C++ bridge for video processing  
-? **Responsive Design** - Adaptive layouts, flexible sizing  
-? **Clean Architecture** - Scalable, maintainable, testable code  
+- **Flutter**: 3.35.7
+- **Dart**: 3.9.2
+- **State Management**: Riverpod 2.6.1
+- **Architecture**: Clean architecture with separated concerns
+- **Platform**: Desktop (Windows, macOS, Linux)
 
----
+## Key Flutter Features
 
-## ?? Features
+### 1. State Management with Riverpod
 
-- ?? Multi-track timeline with drag-and-drop
-- ?? Real-time video preview with audio sync
-- ? Clip trimming, splitting, speed control
-- ?? Scale, rotate, position videos
-- ?? Text overlays with custom styling
-- ?? Modern dark theme UI
-- ?? Keyboard shortcuts
-- ?? Unlimited undo/redo
-- ?? Multiple aspect ratios (16:9, 9:16, 1:1, etc.)
-- ?? Quality presets (4K, 1080p, 720p, 480p)
+The application uses Riverpod's StateNotifier pattern for predictable state updates:
 
----
-
-## ??? Flutter Architecture
-
-### Project Structure
-```
-lib/
-??? main.dart          # App entry point
-??? providers/       # Riverpod state management
-?   ??? editor_provider.dart     # Main app state
-??? screens/
-?   ??? editor_screen.dart       # Main editing screen
-??? widgets/
-?   ??? toolbar.dart             # Top toolbar
-?   ??? timeline_widget.dart     # Multi-track timeline
-?   ??? video_preview.dart       # Video preview
-? ??? properties/       # Property panels
-?   ??? common/    # Reusable components
-?     ??? studio_button.dart
-?       ??? studio_slider.dart
-?     ??? studio_card.dart
-?       ??? studio_text_field.dart
-?  ??? studio_switch.dart
-??? theme/  # Design system
-?   ??? colors.dart      # Color palette
-?   ??? typography.dart          # Font system
-?   ??? spacing.dart             # Spacing scale
-?   ??? app_theme.dart      # Theme config
-??? models/
-?   ??? text_layer_data.dart     # Data models
-??? audio/
-?   ??? audio_playback_manager.dart
-??? utils/
-    ??? animations.dart          # Animation helpers
-```
-
-### State Management (Riverpod)
 ```dart
-// Immutable state with Riverpod
 class EditorNotifier extends StateNotifier<EditorState> {
   EditorNotifier() : super(EditorState.initial());
 
   void updateClip(int clipId, {double? scaleX, double? scaleY}) {
     state = state.copyWith(
       clips: state.clips.map((clip) => 
-        clip.id == clipId 
-      ? clip.copyWith(scaleX: scaleX, scaleY: scaleY)
+   clip.id == clipId 
+  ? clip.copyWith(scaleX: scaleX, scaleY: scaleY)
           : clip
-      ).toList(),
-  );
-  }
-}
-
-// Consumer widget
-class VideoPreview extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final editorState = ref.watch(editorProvider);
-    return /* ... */;
+    ).toList(),
+);
   }
 }
 ```
 
-### Custom Design System
+Consumer widgets automatically rebuild when state changes:
+
 ```dart
-// Consistent component API
+class VideoPreview extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final editorState = ref.watch(editorProvider);
+    return CustomPaint(
+      painter: VideoPainter(frame: editorState.currentFrame),
+    );
+  }
+}
+```
+
+### 2. Custom Design System
+
+Complete component library with consistent theming:
+
+```dart
+// Buttons
 StudioButton.primary(
   onPressed: () => exportVideo(),
   icon: Icons.file_download,
@@ -109,196 +66,256 @@ StudioButton.primary(
 // Typography
 Text('Timeline', style: AppTypography.headingMedium)
 
-// Spacing (8px grid)
+// Spacing
 Padding(padding: EdgeInsets.all(AppSpacing.m))
 
 // Colors
 Container(color: AppColors.accentBlue)
 ```
 
----
+### 3. Project Structure
 
-## ?? Design System
+```
+lib/
+??? main.dart
+??? providers/
+?   ??? editor_provider.dart        # Riverpod state management
+??? screens/
+?   ??? editor_screen.dart    # Main editor interface
+??? widgets/
+?   ??? toolbar.dart    # Top action bar
+?   ??? timeline_widget.dart        # Multi-track timeline
+?   ??? video_preview.dart # Real-time preview
+?   ??? properties/      # Property panels
+?   ??? common/   # Reusable components
+?       ??? studio_button.dart
+?       ??? studio_slider.dart
+?    ??? studio_card.dart
+?       ??? studio_text_field.dart
+?       ??? studio_switch.dart
+??? theme/
+?   ??? colors.dart       # Color palette
+???? typography.dart     # Font system
+?   ??? spacing.dart         # Spacing scale
+?   ??? app_theme.dart     # Theme configuration
+??? models/
+?   ??? text_layer_data.dart        # Data models
+??? audio/
+?   ??? audio_playback_manager.dart # Audio handling
+??? utils/
+    ??? animations.dart       # Animation utilities
+```
+
+## Design System
 
 ### Color Palette
+
 ```dart
-primaryBlack:     #0A0A0A  // Background
-secondaryBlack:   #1A1A1A  // Cards
-tertiaryBlack:    #2A2A2A// Hover
+// Background colors
+primaryBlack:   #0A0A0A
+secondaryBlack:   #1A1A1A
+tertiaryBlack:    #2A2A2A
 
-accentBlue:  #007BFF  // Primary actions
-accentBlueDim:    #005BBF  // Hover
+// Accent colors
+accentBlue:       #007BFF
+accentBlueDim:    #005BBF
 
+// Text colors
 textPrimary:      #FFFFFF
 textSecondary:    #B0B0B0
 textTertiary:     #808080
 ```
 
-### Typography
+### Typography System
+
 ```dart
-// Headings - Poppins
-headingLarge:  24px, 600
-headingMedium: 20px, 600
+// Headings - Poppins (600 weight)
+headingLarge:     24px
+headingMedium:    20px
+headingSmall:     16px
 
-// Body - Inter
-bodyLarge:     16px, 400
-bodyMedium:    14px, 400
+// Body - Inter (400 weight)
+bodyLarge:        16px
+bodyMedium:       14px
+bodySmall:        12px
 
-// Mono - JetBrains Mono
-mono:          14px, 400
+// Monospace - JetBrains Mono (400 weight)
+mono:      14px
 ```
 
-### Components
-All components follow Material 3 principles with custom styling:
+### Spacing Scale
 
-**StudioButton** - Multi-variant button system
-- Primary (filled, high emphasis)
-- Secondary (outlined, medium emphasis)
-- Text (low emphasis)
+```dart
+xs:  4px    // Tight spacing
+s:   8px    // Small gaps
+m:   16px   // Standard spacing
+l:   24px   // Section spacing
+xl:  32px   // Large spacing
+xxl: 48px   // Hero spacing
+```
 
-**StudioSlider** - Themed slider with labels
+## Component Library
 
-**StudioCard** - Container with consistent styling
+### StudioButton
 
-**StudioTextField** - Form input with validation
+Multi-variant button system following Material 3 principles:
 
-**StudioSwitch** - Toggle control
+```dart
+StudioButton.primary()     // Filled button, high emphasis
+StudioButton.secondary()   // Outlined button, medium emphasis
+StudioButton.text()        // Text-only button, low emphasis
+```
 
----
+### StudioSlider
 
-## ?? Tech Stack
+Custom styled slider with labels and value display:
 
-### Frontend
-- **Framework**: Flutter 3.35.7
-- **Language**: Dart 3.9.2
-- **State Management**: Riverpod 2.6.1
-- **UI**: Material 3 with custom theme
+```dart
+StudioSlider(
+  label: 'Scale',
+  value: 1.0,
+  min: 0.1,
+  max: 3.0,
+  onChanged: (value) => updateScale(value),
+)
+```
 
-### Key Packages
+### StudioCard
+
+Consistent container styling:
+
+```dart
+StudioCard(
+  padding: AppSpacing.m,
+  child: Column(children: [...]),
+)
+```
+
+## Advanced Flutter Patterns
+
+### 1. Immutable State Updates
+
+All state changes follow immutable patterns:
+
+```dart
+state = state.copyWith(
+  selectedClipId: newId,
+  clips: updatedClipsList,
+);
+```
+
+### 2. Provider Composition
+
+Modular provider architecture for feature isolation:
+
+```dart
+final editorProvider = StateNotifierProvider<EditorNotifier, EditorState>(...);
+final timelineProvider = Provider((ref) => ref.watch(editorProvider).timeline);
+```
+
+### 3. Custom Rendering
+
+Custom painters for specialized UI elements:
+
+```dart
+CustomPaint(
+  painter: TimelineGridPainter(zoom: editorState.zoom),
+  child: Stack(children: [...]),
+)
+```
+
+### 4. Efficient List Rendering
+
+ListView.builder for performance:
+
+```dart
+ListView.builder(
+  itemCount: clips.length,
+  itemBuilder: (context, index) => ClipWidget(clip: clips[index]),
+)
+```
+
+### 5. Debounced UI Updates
+
+Preventing excessive rebuilds during slider interaction:
+
+```dart
+Timer? _debounceTimer;
+void onSliderChanged(double value) {
+  _debounceTimer?.cancel();
+  _debounceTimer = Timer(Duration(milliseconds: 100), () {
+    updateValue(value);
+  });
+}
+```
+
+## Flutter Dependencies
+
 ```yaml
 dependencies:
+  flutter:
+  sdk: flutter
   flutter_riverpod: ^2.6.1
   file_picker: ^6.2.1
   audioplayers: ^5.2.1
   ffi: ^2.1.0
 ```
 
----
+## Application Features
 
-## ?? Key Features for Portfolio
-
-### 1. Advanced State Management
-- Riverpod StateNotifier pattern
-- Immutable state updates
-- Granular widget rebuilds
-- State persistence across sessions
-
-### 2. Custom UI Components
-Fully reusable component library:
-```dart
-StudioButton.primary()
-StudioButton.secondary()
-StudioSlider(label: 'Scale', value: 1.0, ...)
-StudioCard(child: /* ... */)
-```
-
-### 3. Complex Interactions
-- Drag-and-drop timeline clips
-- Interactive resize handles
-- Real-time preview updates
+- Multi-track timeline with drag-and-drop
+- Real-time video preview
+- Clip trimming, splitting, and speed control
+- Video scaling and positioning
+- Text overlays with customization
+- Audio waveform visualization
+- Multiple aspect ratios (16:9, 9:16, 1:1, 4:3, 21:9)
+- Quality presets (4K, 1080p, 720p, 480p)
+- Undo/redo functionality
 - Keyboard shortcuts
-- Smooth animations
 
-### 4. Responsive Design
-- Adaptive layouts for different window sizes
-- Flexible widget composition
-- Material 3 responsive breakpoints
+## Installation
 
-### 5. Performance
-- Efficient list rendering (ListView.builder)
-- Debounced UI updates
-- Frame caching
-- Memory-efficient image handling
-
----
-
-## ?? Screenshots
-
-![Main Interface](https://via.placeholder.com/800x450?text=Multi-track+Timeline+Editor)
-*Multi-track timeline with real-time preview*
-
-![Components](https://via.placeholder.com/800x450?text=Design+System+Components)
-*Reusable UI components from design system*
-
----
-
-## ??? Getting Started
-
-### Prerequisites
 ```bash
-Flutter SDK 3.35.7+
-Dart SDK 3.9.2+
-```
-
-### Installation
-```bash
-# Clone
 git clone https://github.com/melihgulbay/VideoCut.git
 cd VideoCut
-
-# Install dependencies
 flutter pub get
-
-# Run on Windows
 flutter run -d windows
-
-# Run on macOS
-flutter run -d macos
-
-# Run on Linux
-flutter run -d linux
 ```
 
----
+## Flutter Skills Demonstrated
 
-## ?? What This Project Shows
+**State Management**
+- Riverpod StateNotifier pattern
+- Immutable state updates
+- Provider composition
+- Granular rebuild optimization
 
-**For Flutter Developers:**
+**UI/UX**
+- Custom design system
+- Reusable component library
+- Material 3 principles
+- Responsive layouts
+- Smooth animations
 
-? **Riverpod Mastery** - Complex state management patterns  
-? **Design Systems** - Scalable, reusable component libraries  
-? **Custom UI** - Beyond basic Material widgets  
-? **FFI Integration** - Native code bridges  
-? **Architecture** - Clean, testable, maintainable  
-? **Production Ready** - Error handling, performance, UX  
+**Architecture**
+- Clean separation of concerns
+- Modular widget composition
+- Scalable project structure
+- Testable code patterns
 
-**Perfect showcase for:**
-- MVP/SaaS development
-- Enterprise Flutter apps
-- Design-to-code implementation
-- Advanced UI/UX
-- Cross-platform desktop apps
+**Performance**
+- Efficient list rendering
+- Debounced updates
+- Memory-efficient image handling
+- Frame caching strategies
 
----
+**Advanced Features**
+- FFI integration with native code
+- Custom rendering with CustomPainter
+- Complex gesture handling
+- Real-time data synchronization
 
-## ?? License
+## License
 
 MIT License
-
----
-
-## ????? Developer
-
-**Melih Gülbay**
-
-Portfolio-quality Flutter project demonstrating:
-- Advanced state management
-- Custom design systems
-- Complex UI implementation
-- Production-ready architecture
-
-**Built for showcasing Flutter development expertise in job applications** ??
-
----
-
-*Perfect for demonstrating Flutter skills to companies like WeStudio and similar development teams!*
