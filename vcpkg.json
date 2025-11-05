@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "videocut",
+  "version": "1.0.0",
+  "builtin-baseline": "4580816534ed8fd9634ac83d46471440edd82dfe",
+  "dependencies": [
+    "ffmpeg[core,avcodec,avformat,avutil,swscale,swresample,avfilter]"
+  ]
+}

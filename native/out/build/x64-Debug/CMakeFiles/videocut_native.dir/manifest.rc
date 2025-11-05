@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+2 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "C:/Users/mehme/Desktop/VideoCut/native/out/build/x64-Debug/CMakeFiles/videocut_native.dir/embed.manifest"

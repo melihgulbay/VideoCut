@@ -1,0 +1,3 @@
+C:/Users/mehme/Desktop/VideoCut/native/out/build/x64-Debug/CMakeFiles/videocut_native.dir
+C:/Users/mehme/Desktop/VideoCut/native/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/mehme/Desktop/VideoCut/native/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir

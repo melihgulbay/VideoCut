@@ -1,0 +1,45 @@
+name: videocut
+description: Professional video editing application with C++ core and Flutter UI
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ffi: ^2.1.0
+  path_provider: ^2.1.1
+  file_picker: ^6.1.1
+  provider: ^6.1.1
+  flutter_riverpod: ^2.6.1
+  path: ^1.8.3
+  audioplayers: ^5.2.1 # CHANGED: Use audioplayers instead (better Windows support)
+  video_player: ^2.8.7  # NEW: Add video player for video file audio
+  google_fonts: ^6.1.0 # Modern typography
+  flutter_animate: ^4.3.0      # Smooth animations
+  shimmer: ^3.0.0       # Loading effects
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  ffigen: ^10.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/flowcut.png
+
+ffigen:
+  name: 'NativeBindings'
+  description: 'Bindings for VideoCut native library'
+  output: 'lib/native/bindings_generated.dart'
+  headers:
+    entry-points:
+      - 'native/include/api.h'
+  preamble: |
+    // ignore_for_file: always_specify_types
+    // ignore_for_file: camel_case_types
+    // ignore_for_file: non_constant_identifier_names
