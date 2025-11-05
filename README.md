@@ -77,33 +77,33 @@ Container(color: AppColors.accentBlue)
 
 ```
 lib/
-??? main.dart
-??? providers/
-?   ??? editor_provider.dart        # Riverpod state management
-??? screens/
-?   ??? editor_screen.dart    # Main editor interface
-??? widgets/
-?   ??? toolbar.dart    # Top action bar
-?   ??? timeline_widget.dart        # Multi-track timeline
-?   ??? video_preview.dart # Real-time preview
-?   ??? properties/      # Property panels
-?   ??? common/   # Reusable components
-?       ??? studio_button.dart
-?       ??? studio_slider.dart
-?    ??? studio_card.dart
-?       ??? studio_text_field.dart
-?       ??? studio_switch.dart
-??? theme/
-?   ??? colors.dart       # Color palette
-???? typography.dart     # Font system
-?   ??? spacing.dart         # Spacing scale
-?   ??? app_theme.dart     # Theme configuration
-??? models/
-?   ??? text_layer_data.dart        # Data models
-??? audio/
-?   ??? audio_playback_manager.dart # Audio handling
-??? utils/
-    ??? animations.dart       # Animation utilities
+|-- main.dart
+|-- providers/
+|   `-- editor_provider.dart      # Riverpod state management
+|-- screens/
+|   `-- editor_screen.dart          # Main editor interface
+|-- widgets/
+|   |-- toolbar.dart        # Top action bar
+|   |-- timeline_widget.dart        # Multi-track timeline
+|   |-- video_preview.dart          # Real-time preview
+|   |-- properties/     # Property panels
+|   `-- common/   # Reusable components
+|       |-- studio_button.dart
+|       |-- studio_slider.dart
+|       |-- studio_card.dart
+|  |-- studio_text_field.dart
+|`-- studio_switch.dart
+|-- theme/
+|   |-- colors.dart    # Color palette
+|   |-- typography.dart             # Font system
+|   |-- spacing.dart # Spacing scale
+|   `-- app_theme.dart              # Theme configuration
+|-- models/
+|   `-- text_layer_data.dart        # Data models
+|-- audio/
+|   `-- audio_playback_manager.dart # Audio handling
+`-- utils/
+    `-- animations.dart             # Animation utilities
 ```
 
 ## Design System
