@@ -278,23 +278,14 @@ dependencies:
 
 ### Main Editor Interface
 ![Main Interface](screenshots/1%20(1).png)
-*Multi-track timeline editor with real-time video preview and property panels*
 
-### Timeline and Controls
 ![Timeline](screenshots/1%20(3).png)
-*Drag-and-drop timeline with multiple tracks and clip management*
 
-### Video Properties
 ![Properties](screenshots/1%20(4).png)
-*Video transformation controls with scale, rotation, and position adjustments*
 
-### Text Layer Editing
 ![Text Editor](screenshots/1%20(5).png)
-*Text overlay system with font customization and positioning*
 
-### Export Dialog
 ![Export](screenshots/1%20(2).png)
-*Export settings with aspect ratio and quality presets*
 
 ## Installation
 
