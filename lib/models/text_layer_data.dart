@@ -38,7 +38,7 @@ class TextLayerData {
   
   const TextLayerData({
   required this.layerId,
-    this.text = '',
+    this.text = 'New Text',
     this.trackIndex = 0,
     required this.startTimeMs,
     required this.endTimeMs,
